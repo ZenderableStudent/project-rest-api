@@ -29,9 +29,9 @@ public class ZadanieController {
 	 
 	 @GetMapping("/zadania/{zadanieId}")
 	 ResponseEntity<Zadanie> getZadanie(@PathVariable Integer studentId)
-	 {// @PathVariable oznacza, ¿e wartoœæ  
+	 {// @PathVariable oznacza, ï¿½e wartoï¿½ï¿½  
 		 return ResponseEntity.of(zadanieService.getZadanie(studentId)); 
-		 // parametru przekazywana jest w œcie¿ce    }
+		 // parametru przekazywana jest w ï¿½cieï¿½ce    }
 	 }
 	 
 	  @PostMapping(path = "/zadania")
@@ -61,6 +61,5 @@ public class ZadanieController {
 		  {          zadanieService.deleteZadanie(zadanieId); 
 		  return new ResponseEntity<Void>(HttpStatus.OK); 
 		  }).orElseGet(() -> ResponseEntity.notFound().build()); 
-		  }
-		  
+		  }	  
 }

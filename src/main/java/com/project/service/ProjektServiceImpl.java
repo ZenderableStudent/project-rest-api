@@ -33,10 +33,7 @@ import com.project.repository.ProjektRepository;
 	         pr.setDataOddania(projekt.getDataOddania());
 	         pr.setDataCzasUtworzenia(LocalDateTime.now());
 	         projektRepository.save(pr);
-	         
-	         return projekt;
-	         ///?????
-	         
+	         return projekt;    
    }
  
   @Override  
@@ -56,8 +53,8 @@ import com.project.repository.ProjektRepository;
    {  
 	   Page<Projekt> pr = projektRepository.findByNazwaContainingIgnoreCase(nazwa, pageable);
 	   return pr;
-   }}
-   
+   }
+}
    
    
    

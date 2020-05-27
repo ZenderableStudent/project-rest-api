@@ -35,9 +35,9 @@ public class ProjektController {
 	 
 	 @GetMapping("/projekty/{projektId}")
 	 ResponseEntity<Projekt> getProjekt(@PathVariable Integer projektId)
-	 {// @PathVariable oznacza, ¿e wartoœæ  
+	 {// @PathVariable oznacza, ze wartosc  
 		 return ResponseEntity.of(projektService.getProjekt(projektId)); 
-		 // parametru przekazywana jest w œcie¿ce    }
+		 // parametru przekazywana jest w ï¿½cieï¿½ce    }
 	 }
 	 
 	  @PostMapping(path = "/projekty")
@@ -69,18 +69,16 @@ public class ProjektController {
 		  }).orElseGet(() -> ResponseEntity.notFound().build()); 
 		  }
 		  
-	//Przyk³ad ¿¹dania wywo³uj¹cego metodê: http://localhost:8080/api/projekty?page=0&size=10&sort=nazwa,desc
+	//Przykï¿½ad ï¿½ï¿½dania wywoï¿½ujï¿½cego metodï¿½: http://localhost:8080/api/projekty?page=0&size=10&sort=nazwa,desc
 	  @GetMapping(value = "/projekty")
-	  Page<Projekt> getProjekty(Pageable pageable) { // @RequestHeader HttpHeaders headers – je¿eli potrzebny
-	  return projektService.getProjekty(pageable); // by³by nag³ówek, wystarczy dodaæ drug¹ zmienn¹ z adnotacj¹
+	  Page<Projekt> getProjekty(Pageable pageable) { // @RequestHeader HttpHeaders headers ï¿½ jeï¿½eli potrzebny
+	  return projektService.getProjekty(pageable); // byï¿½by nagï¿½ï¿½wek, wystarczy dodaï¿½ drugï¿½ zmiennï¿½ z adnotacjï¿½
 	  }
 
-	  // Przyk³ad ¿¹dania wywo³uj¹cego metodê: GET http://localhost:8080/api/projekty?nazwa=webowa
-	  // Metoda zostanie wywo³ana tylko, gdy w ¿¹daniu bêdzie przesy³ana wartoœæ parametru nazwa.
+	  // Przykï¿½ad ï¿½ï¿½dania wywoï¿½ujï¿½cego metodï¿½: GET http://localhost:8080/api/projekty?nazwa=webowa
+	  // Metoda zostanie wywoï¿½ana tylko, gdy w ï¿½ï¿½daniu bï¿½dzie przesyï¿½ana wartoï¿½ï¿½ parametru nazwa.
 	  @GetMapping(value = "/projekty", params="nazwa")
 	  Page<Projekt> getProjektyByNazwa(@RequestParam String nazwa, Pageable pageable) {
 	  return projektService.searchByNazwa(nazwa, pageable);
 	  }
-	  
-
 }

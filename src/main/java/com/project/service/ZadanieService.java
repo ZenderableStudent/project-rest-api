@@ -12,4 +12,3 @@ public interface ZadanieService {
    Page<Zadanie> getZadania(Pageable pageable);
    Page<Zadanie> searchByNazwa(Integer id, Pageable pageable); 
 } 
-

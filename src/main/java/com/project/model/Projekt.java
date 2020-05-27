@@ -29,8 +29,8 @@ public class Projekt {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="projekt_id")
 	private Integer projektId;
-	   @NotBlank(message = "Pole nazwa nie mo¿e byæ puste!")    
-	   @Size(min = 3, max = 50, message = "Nazwa musi zawieraæ od {min} do {max} znaków!")
+	   @NotBlank(message = "Pole nazwa nie moï¿½e byï¿½ puste!")    
+	   @Size(min = 3, max = 50, message = "Nazwa musi zawieraï¿½ od {min} do {max} znakï¿½w!")
 	@Column(nullable=false,length=50)
 	private String nazwa;
 	@Column(name="opis", length = 1000)
@@ -93,9 +93,7 @@ public void setDataOddania(LocalDate dataOddania) {
 	this.dataOddania = dataOddania;
 }
  
-public Projekt() {
-	
-}
+public Projekt() {}
 
 public Projekt(Integer projektId, String nazwa, String opis, LocalDateTime dataCzasUtworzenia, LocalDate dataOddania) {
 	super();
@@ -111,5 +109,4 @@ public Projekt(String nazwa, String opis, LocalDate dataOddania) {
 	this.opis = opis;
 	this.dataOddania = dataOddania;
 }
-
 }

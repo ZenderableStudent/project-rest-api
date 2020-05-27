@@ -30,9 +30,9 @@ public class StudentController {
 	 
 	 @GetMapping("/studenci/{studentId}")
 	 ResponseEntity<Student> getStudent(@PathVariable Integer studentId)
-	 {// @PathVariable oznacza, ¿e wartoœæ  
+	 {// @PathVariable oznacza, ï¿½e wartoï¿½ï¿½  
 		 return ResponseEntity.of(studentService.getStudent(studentId)); 
-		 // parametru przekazywana jest w œcie¿ce    }
+		 // parametru przekazywana jest w ï¿½cieï¿½ce    }
 	 }
 	 
 	  @PostMapping(path = "/studenci")
@@ -62,6 +62,5 @@ public class StudentController {
 		  {          studentService.deleteStudent(studentId); 
 		  return new ResponseEntity<Void>(HttpStatus.OK); 
 		  }).orElseGet(() -> ResponseEntity.notFound().build()); 
-		  }
-		  
+		  } 
 }

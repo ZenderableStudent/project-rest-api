@@ -46,9 +46,7 @@ public class StudentServiceImpl  implements StudentService {
 	public Student setStudent(Student student) {
 		   Student st = student;
 	         studentRepository.save(st);
-	         
 	         return st;
-	         ///?????
 		
 	}
 
@@ -58,8 +56,4 @@ public class StudentServiceImpl  implements StudentService {
 		 studentRepository.deleteById(Id);
 		
 	}
-
-	
-
-	
 }

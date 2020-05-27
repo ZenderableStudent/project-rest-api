@@ -23,7 +23,6 @@ public class ZadanieServiceImpl implements ZadanieService {
 		   this.zadanieRepository = zadanieRepository;  
 		   } 
 	
-	
 	@Override
 	public Optional<Zadanie> getZadanie(Integer Id) {
 		return zadanieRepository.findById(Id);
@@ -34,7 +33,6 @@ public class ZadanieServiceImpl implements ZadanieService {
 		Zadanie zd = zadanie;
 		zadanieRepository.save(zd);
 		return zd;
-		///???
 	}
 
 	@Override
@@ -55,5 +53,4 @@ public class ZadanieServiceImpl implements ZadanieService {
 		 Page<Zadanie> pr = zadanieRepository.findZadaniaProjektu(id, pageable);
 		   return pr;
 	}
-
 }

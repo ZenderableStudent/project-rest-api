@@ -22,8 +22,8 @@ public class Zadanie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="zadanie_id")
 	private Integer zadanieId;
-	@NotBlank(message = "Pole nazwa nie mo¿e byæ puste!")    
-	   @Size(min = 3, max = 50, message = "Nazwa musi zawieraæ od {min} do {max} znaków!")
+	@NotBlank(message = "Pole nazwa nie moze byc puste!")    
+	   @Size(min = 3, max = 50, message = "Nazwa musi zawierac od {min} do {max} znakow!")
 	@Column(name="nazwa",nullable = false,length=50)
 	private String nazwa;
 	@Column(name="kolejnosc")
@@ -82,5 +82,4 @@ public class Zadanie {
 		this.kolejnosc = kolejnosc;
 		this.opis = opis;
 	}
-	
 }
