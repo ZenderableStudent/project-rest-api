@@ -1,5 +1,5 @@
-package com.project.service;
-
+package com.project.service; 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -9,54 +9,57 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.project.model.Projekt;
-import com.project.model.Zadanie;
-import com.project.repository.ProjektRepository; 
-import com.project.repository.ZadanieRepository;
+import com.project.repository.ProjektRepository;
 
-@Service
-public class ProjektServiceImpl implements ProjektService {
-	 private ProjektRepository projektRepository;
-	 private ZadanieRepository zadanieRepository;
-
-	 @Autowired   // w tej wersji konstruktora Spring wstrzyknie dwa repozytoria
-	 public ProjektServiceImpl(ProjektRepository projektRepository, ZadanieRepository zadanieRepo) {
-		 this.projektRepository = projektRepository;
-		 this.zadanieRepository = zadanieRepo;
-	 }
-
-	 @Autowired
-	 public ProjektServiceImpl(ProjektRepository projektRepository) {
-	 this.projektRepository = projektRepository;
-	 }
-	 @Override
-	 public Optional<Projekt> getProjekt(Integer projektId) {
-	 return projektRepository.findById(projektId);
-	 }
-	 @Override
-	 public Projekt setProjekt(Projekt projekt) {
-	 //TODO
-	 return null;
-	 }
-	 
-	 @Override
-	 @Transactional
-	 public void deleteProjekt(Integer projektId) {
-	 for (Zadanie zadanie : zadanieRepository.findZadaniaProjektu(projektId)) {
-	 zadanieRepository.delete(zadanie);
-	 }
+@Service  public class ProjektServiceImpl implements ProjektService { 
+	
+   private ProjektRepository projektRepository; 
+   
+   @Autowired    public ProjektServiceImpl(ProjektRepository projektRepository)
+   {     
+	   this.projektRepository = projektRepository;  
+	   } 
+ 
+   @Override    public Optional<Projekt> getProjekt(Integer projektId)
+   {    
+	   return projektRepository.findById(projektId);     
+   }
+ 
+   @Override    public Projekt setProjekt(Projekt projekt)
+   {    
+	         Projekt pr = new Projekt();
+	         pr.setNazwa(projekt.getNazwa());
+	         pr.setOpis(projekt.getOpis());
+	         pr.setDataOddania(projekt.getDataOddania());
+	         pr.setDataCzasUtworzenia(LocalDateTime.now());
+	         projektRepository.save(pr);
+	         
+	         return projekt;
+	         ///?????
+	         
+   }
+ 
+  @Override  
+  @Transactional
+  public void deleteProjekt(Integer projektId)
+  
+  { 
 	 projektRepository.deleteById(projektId);
-	 }
-
-	 @Override
-	 public Page<Projekt> getProjekty(Pageable pageable) {
-	 //TODO
-	 return null;
-	 }
-	 
-	 @Override
-	 public Page<Projekt> searchByNazwa(String nazwa, Pageable pageable) {
-	 //TODO
-	 return null;
-	 }
-
-}
+  }
+ 
+  @Override   public Page<Projekt> getProjekty(Pageable pageable)
+  {  
+	  Page<Projekt> pr = projektRepository.findAll(pageable);
+	  return pr;
+  }
+   @Override    public Page<Projekt> searchByNazwa(String nazwa, Pageable pageable)
+   {  
+	   Page<Projekt> pr = projektRepository.findByNazwaContainingIgnoreCase(nazwa, pageable);
+	   return pr;
+   }}
+   
+   
+   
+   
+   
+   

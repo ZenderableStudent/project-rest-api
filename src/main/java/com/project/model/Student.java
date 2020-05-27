@@ -13,96 +13,114 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity //Indeksujemy kolumny, które s¹ najczêœciej wykorzystywane do wyszukiwania studentów
-@Table(name = "student",
-indexes = { @Index(name = "idx_nazwisko", columnList = "nazwisko", unique = false),
- @Index(name = "idx_nr_indeksu", columnList = "nr_indeksu", unique = true) })
-public class Student {
-	/* TODO Uzupe³nij kod o zmienne reprezentuj¹ce pola tabeli student (patrz rys. 8.1),
-	. nastêpnie wygeneruj dla nich akcesory (Source -> Generate Getters and Setters)
-	*/
-	
-	@ManyToMany(mappedBy = "studenci")
-	private Set<Projekt> projekty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-	
+@Entity
+@Table(name="student",
+		indexes = { @Index(name= "idx_nazwisko", columnList="nazwisko",unique = false),
+					@Index(name="idx_nr_indeksu",columnList="nr_indeksu",unique = false)})
+
+public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="student_id")
-	private Integer studentId;
-	
-	
-	 @NotBlank(message = "Pole imie nie mo¿e byæ puste!")
-	 @Size(min = 3, max = 20, message = "Imie musi zawieraæ od {min} do {max} znaków!")
-	 @Column(nullable = false, length = 20)
+	private Integer student_id;
+	@NotBlank(message = "Pole nazwa nie mo¿e byæ puste!")    
+	   @Size(min = 3, max = 50, message = "Nazwa musi zawieraæ od {min} do {max} znaków!")
+	@Column(name="imie",nullable = false, length = 50)
 	private String imie;
-	
-	 
-	 @NotBlank(message = "Pole nazwisko nie mo¿e byæ puste!")
-	 @Size(min = 2, max = 50, message = "Nazwisko musi zawieraæ od {min} do {max} znaków!")
-	 @Column(nullable = false, length = 50)
+	@NotBlank(message = "Pole nazwa nie mo¿e byæ puste!")    
+	   @Size(min = 3, max = 100, message = "Nazwa musi zawieraæ od {min} do {max} znaków!")
+	@Column(name="nazwisko",nullable = false, length = 100)
 	private String nazwisko;
-	
-	 @NotBlank(message = "Pole nrIndeksu nie mo¿e byæ puste!")
-	 @Size(min = 1, max = 100, message = "NrIndeksu musi zawieraæ od {min} do {max} znaków!")
-	 @Column(nullable = false, length = 100)
-	private String nrIndeksu;
-	
-	 @NotBlank(message = "Pole email nie mo¿e byæ puste!")
-	 @Size(min = 10, max = 100, message = "Email musi zawieraæ od {min} do {max} znaków!")
-	 @Column(nullable = false, length = 100)
+	@NotBlank(message = "Pole nazwa nie mo¿e byæ puste!")    
+	   @Size(min = 3, max = 20, message = "Nazwa musi zawieraæ od {min} do {max} znaków!")
+	@Column(name="nr_indeksu",nullable = false, length = 20)
+	private String nr_indeksu;
+	@NotBlank(message = "Pole nazwa nie mo¿e byæ puste!")    
+	   @Size(min = 3, max = 50, message = "Nazwa musi zawieraæ od {min} do {max} znaków!")
+	@Column(name="email",nullable = false, length = 50)
 	private String email;
+	@Column(name="stacjonarny",nullable=false)
+	private Boolean stacjonarny;
+	@ManyToMany(mappedBy="studenci")
+	@JsonIgnoreProperties({"student"})
+	private Set<Projekt> projekty;
 	
-	private boolean stacjonarny;
-	
-	public Student() {}
-	public Student(String imie, String nazwisko, String nrIndeksu, Boolean stacjonarny) {
-	this.imie = imie;
-	this.nazwisko = nazwisko;
-	this.nrIndeksu = nrIndeksu;
+	public Set<Projekt> getProjekty() {
+		return projekty;
 	}
-	public Student(String imie, String nazwisko, String nrIndeksu, String email, Boolean stacjonarny) {
-	this.imie = imie;
-	this.nazwisko = nazwisko;
-	this.nrIndeksu = nrIndeksu;
-	this.email = email;
-	this.stacjonarny = stacjonarny;
+
+	public void setProjekty(Set<Projekt> projekty) {
+		this.projekty = projekty;
 	}
-	public Integer getStudentId() {
-		return studentId;
+
+	public Integer getStudent_id() {
+		return student_id;
 	}
-	public void setStudentId(Integer studentId) {
-		this.studentId = studentId;
+
+	public void setStudent_id(Integer student_id) {
+		this.student_id = student_id;
 	}
+
 	public String getImie() {
 		return imie;
 	}
+
 	public void setImie(String imie) {
 		this.imie = imie;
 	}
+
 	public String getNazwisko() {
 		return nazwisko;
 	}
+
 	public void setNazwisko(String nazwisko) {
 		this.nazwisko = nazwisko;
 	}
-	public String getNrIndeksu() {
-		return nrIndeksu;
+
+	public String getNr_indeksu() {
+		return nr_indeksu;
 	}
-	public void setNrIndeksu(String nrIndeksu) {
-		this.nrIndeksu = nrIndeksu;
+
+	public void setNr_indeksu(String nr_indeksu) {
+		this.nr_indeksu = nr_indeksu;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public boolean isStacjonarny() {
+
+	public Boolean getStacjonarny() {
 		return stacjonarny;
 	}
-	public void setStacjonarny(boolean stacjonarny) {
+
+	public void setStacjonarny(Boolean stacjonarny) {
 		this.stacjonarny = stacjonarny;
 	}
+
+	public Student() {}
+
+	public Student(String imie, String nazwisko, String nr_indeksu, Boolean stacjonarny) {
+		super();
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.nr_indeksu = nr_indeksu;
+		this.stacjonarny = stacjonarny;
+	}
+
+	public Student(String imie, String nazwisko, String nr_indeksu, String email, Boolean stacjonarny) {
+		super();
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.nr_indeksu = nr_indeksu;
+		this.email = email;
+		this.stacjonarny = stacjonarny;
+	}
+	
 
 }
