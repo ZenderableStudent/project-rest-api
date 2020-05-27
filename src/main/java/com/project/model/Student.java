@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="student",
 		indexes = { @Index(name= "idx_nazwisko", columnList="nazwisko",unique = false),
-					@Index(name="idx_nr_indeksu",columnList="nr_indeksu",unique = false)})
+					@Index(name="idx_nr_indeksu",columnList="nrIndeksu",unique = false)})
 
 public class Student {
 	@Id
@@ -35,8 +35,8 @@ public class Student {
 	private String nazwisko;
 	@NotBlank(message = "Pole nazwa nie mo¿e byæ puste!")    
 	   @Size(min = 3, max = 20, message = "Nazwa musi zawieraæ od {min} do {max} znaków!")
-	@Column(name="nr_indeksu",nullable = false, length = 20)
-	private String nr_indeksu;
+	@Column(name="nrIndeksu",nullable = false, length = 20)
+	private String nrIndeksu;
 	@NotBlank(message = "Pole nazwa nie mo¿e byæ puste!")    
 	   @Size(min = 3, max = 50, message = "Nazwa musi zawieraæ od {min} do {max} znaków!")
 	@Column(name="email",nullable = false, length = 50)
@@ -80,11 +80,11 @@ public class Student {
 	}
 
 	public String getNr_indeksu() {
-		return nr_indeksu;
+		return nrIndeksu;
 	}
 
 	public void setNr_indeksu(String nr_indeksu) {
-		this.nr_indeksu = nr_indeksu;
+		this.nrIndeksu = nr_indeksu;
 	}
 
 	public String getEmail() {
@@ -109,7 +109,7 @@ public class Student {
 		super();
 		this.imie = imie;
 		this.nazwisko = nazwisko;
-		this.nr_indeksu = nr_indeksu;
+		this.nrIndeksu = nr_indeksu;
 		this.stacjonarny = stacjonarny;
 	}
 
@@ -117,7 +117,7 @@ public class Student {
 		super();
 		this.imie = imie;
 		this.nazwisko = nazwisko;
-		this.nr_indeksu = nr_indeksu;
+		this.nrIndeksu = nr_indeksu;
 		this.email = email;
 		this.stacjonarny = stacjonarny;
 	}
