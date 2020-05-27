@@ -69,6 +69,18 @@ public class ProjektController {
 		  }).orElseGet(() -> ResponseEntity.notFound().build()); 
 		  }
 		  
+	//Przyk³ad ¿¹dania wywo³uj¹cego metodê: http://localhost:8080/api/projekty?page=0&size=10&sort=nazwa,desc
+	  @GetMapping(value = "/projekty")
+	  Page<Projekt> getProjekty(Pageable pageable) { // @RequestHeader HttpHeaders headers – je¿eli potrzebny
+	  return projektService.getProjekty(pageable); // by³by nag³ówek, wystarczy dodaæ drug¹ zmienn¹ z adnotacj¹
+	  }
+
+	  // Przyk³ad ¿¹dania wywo³uj¹cego metodê: GET http://localhost:8080/api/projekty?nazwa=webowa
+	  // Metoda zostanie wywo³ana tylko, gdy w ¿¹daniu bêdzie przesy³ana wartoœæ parametru nazwa.
+	  @GetMapping(value = "/projekty", params="nazwa")
+	  Page<Projekt> getProjektyByNazwa(@RequestParam String nazwa, Pageable pageable) {
+	  return projektService.searchByNazwa(nazwa, pageable);
+	  }
 	  
 
 }

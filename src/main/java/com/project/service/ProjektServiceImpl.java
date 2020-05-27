@@ -33,10 +33,10 @@ import com.project.repository.ProjektRepository;
 	         pr.setDataOddania(projekt.getDataOddania());
 	         pr.setDataCzasUtworzenia(LocalDateTime.now());
 	         projektRepository.save(pr);
-	        
 	         
 	         return projekt;
-	        
+	         ///?????
+	         
    }
  
   @Override  
@@ -45,7 +45,6 @@ import com.project.repository.ProjektRepository;
   
   { 
 	 projektRepository.deleteById(projektId);
-	 
   }
  
   @Override   public Page<Projekt> getProjekty(Pageable pageable)
